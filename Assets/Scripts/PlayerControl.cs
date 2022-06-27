@@ -122,7 +122,7 @@ public class PlayerControl : MonoBehaviour
     void PlayerExplosion()
     {
         GameObject explosion = (GameObject)Instantiate(Explosion);
-        audioSource.GetComponent<SoundManager>().Ledakan();
+        
         //set posisi explosion
         explosion.transform.position = transform.position;
     }

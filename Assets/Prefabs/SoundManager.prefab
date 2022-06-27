@@ -47,7 +47,7 @@ MonoBehaviour:
   audioSource: {fileID: 7188612038677435566}
   _firePlayer: {fileID: 8300000, guid: 675e34043b79af4429d24cce74a9a4b5, type: 3}
   _fireEnemy: {fileID: 8300000, guid: fc335c1c09c2f06478bfcf8c25a87aa1, type: 3}
-  _explosion: {fileID: 8300000, guid: 142b62754b1084c4098720a9f3ce01e8, type: 3}
+  _gameOver: {fileID: 8300000, guid: 41714ae16c9b60e41a426965904fd43d, type: 3}
 --- !u!82 &7188612038677435566
 AudioSource:
   m_ObjectHideFlags: 0

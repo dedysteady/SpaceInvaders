@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
     public GameObject playerShip;
     public GameObject enemySpawner;
     public GameObject GameOverUI;
+    public GameObject LivesUI;
     public GameObject scoreTextUI;
     public GameObject shootButton;
+    public GameObject titleUI;
 
     public enum GameManagerState
     {
@@ -36,6 +38,12 @@ public class GameManager : MonoBehaviour
                 //hide gameover
                 GameOverUI.SetActive(false);
 
+                //Lives non aktif
+                LivesUI.SetActive(false);
+
+                //title aktif
+                titleUI.SetActive(true);
+
                 //tombol play aktif
                 playButton.SetActive(true);
 
@@ -55,6 +63,12 @@ public class GameManager : MonoBehaviour
                 //open shoot button
                 shootButton.SetActive(true);
 
+                //Lives non aktif
+                LivesUI.SetActive(true);
+
+                //title non aktif
+                titleUI.SetActive(false);
+
                 //mengatur Player aktif dan init nyawa player
                 playerShip.GetComponent<PlayerControl>().Init();
 
@@ -70,6 +84,9 @@ public class GameManager : MonoBehaviour
 
                 //display gameover
                 GameOverUI.SetActive(true);
+
+                //title non aktif
+                titleUI.SetActive(false);
 
                 //hide shoot button
                 shootButton.SetActive(false);

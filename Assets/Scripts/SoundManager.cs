@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip _firePlayer;
     public AudioClip _fireEnemy;
-    public AudioClip _explosion;
+    public AudioClip _gameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -31,13 +31,8 @@ public class SoundManager : MonoBehaviour
         audioSource.PlayOneShot(_fireEnemy);
     }
 
-    public void Ledakan()
+    public void GameOver()
     {
-        audioSource.PlayOneShot(_explosion);
-    }
-
-    public void LedakanEnemy()
-    {
-        audioSource.PlayOneShot(_explosion);
+        audioSource.PlayOneShot(_gameOver);
     }
 }
