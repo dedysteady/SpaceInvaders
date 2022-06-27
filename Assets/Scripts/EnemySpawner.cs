@@ -11,10 +11,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("SpawnEnemy", maxWaktuSpawn);
-
-        //Meningkatkan spawn rate setiap 30 detik
-        InvokeRepeating ("IncreaseSpawnRate", 0f, 30f);
+        
     }
 
     // Update is called once per frame
@@ -68,5 +65,23 @@ public class EnemySpawner : MonoBehaviour
         {
             CancelInvoke ("IncreaseSpawnRate");
         }
+    }
+
+    //fungsi untuk mulai spawn
+    public void StartEnemySpawn()
+    {
+        //reset max spawn
+        maxWaktuSpawn = 5f;
+        Invoke("SpawnEnemy", maxWaktuSpawn);
+
+        //Meningkatkan spawn rate setiap 30 detik
+        InvokeRepeating ("IncreaseSpawnRate", 0f, 30f);
+    }
+
+    //fungsi stop enemy spawn
+    public void StopEnemySpawn()
+    {
+        CancelInvoke ("SpawnEnemy");
+        CancelInvoke ("IncreaseSpawnRate");
     }
 }

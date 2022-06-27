@@ -57,4 +57,13 @@ public class EnemyBullet : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerEnter2D (Collider2D col)
+    {
+        //Deteksi collider pada peluru musuh dengan kapal player
+        if (col.tag == "PlayerShipTag")
+        {
+            Destroy (gameObject); //destroy peluru musuh
+        }
+    }
 }

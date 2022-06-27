@@ -1,41 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
-    public GameObject PlayerBulletGO; //Prefab PlayerBulletGO
+    public GameObject gameManager;
+    public GameObject PlayerBullet; //Prefab PlayerBulletGO
     public GameObject posisiPeluru1;
     public GameObject posisiPeluru2;
+    public GameObject Explosion; //Prefan explosion
+    public GameObject audioSource;
+
+    public Text NyawaText;
+
+    const int MaxNyawa = 3;
+    int Nyawa;
 
     public float speed;
 
-    // Start is called before the first frame update
-    void Start()
+    float accelStartY; //untuk dapat nilai akselerasi Y
+
+    public void Init()
     {
-        
+        Nyawa = MaxNyawa;
+
+        //Update Nyawa Text
+        NyawaText.text = Nyawa.ToString(); 
+
+        //reset posisi Player ke tengah layar
+        transform.position = new Vector2 (0,0);
+
+        //mengaktifkan nyawa
+        gameObject.SetActive(true);
+    }
+
+    // Start is called before the first frame update
+    void Start ()
+    {
+        //mendapatkan inisial akselerasi y
+        accelStartY = Input.acceleration.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //menembak ketika menekan spacebar
-        if(Input.GetKeyDown("space"))
+        //akselerasi
+        float x = Input.acceleration.x;
+        float y = Input.acceleration.y - accelStartY;
+
+        //vector dengan akselerasi
+        Vector2 direction = new Vector2 (x, y);
+
+        if (direction.sqrMagnitude > 1)
         {
-            //Instantiate peluru pertama
-            GameObject peluru1 = (GameObject)Instantiate (PlayerBulletGO);
-            peluru1.transform.position = posisiPeluru1.transform.position; //Mengatur inisial posisi peluru
-
-            //Instantiate peluru kedua
-            GameObject peluru2 = (GameObject)Instantiate (PlayerBulletGO);
-            peluru2.transform.position = posisiPeluru2.transform.position; //Mengatur inisial posisi peluru
+            direction.Normalize();
         }
-
-
-        float x = Input.GetAxisRaw ("Horizontal"); //nilai akan menjadi -1, 0 atau 1 (Kiri, Kosong, Kanan)
-        float y = Input.GetAxisRaw ("Vertical"); //nilai akan menjadi -1, 0 atau 1 (Bawah, Kosong, Atas)
-
-        Vector2 direction = new Vector2 (x, y).normalized;
 
         //Panggil fungsi dan atur posisi pemain
         Move (direction);
@@ -62,5 +82,48 @@ public class PlayerControl : MonoBehaviour
 
         //update posisi player
         transform.position = pos;
+    }
+
+    //fungsi untuk player menembak
+    public void Shoot()
+    {
+        audioSource.GetComponent<SoundManager>().TembakanPlayer();
+       
+        //Instantiate peluru pertama
+        GameObject peluru1 = (GameObject)Instantiate (PlayerBullet);
+        peluru1.transform.position = posisiPeluru1.transform.position; //Mengatur inisial posisi peluru
+
+        //Instantiate peluru kedua
+        GameObject peluru2 = (GameObject)Instantiate (PlayerBullet);
+        peluru2.transform.position = posisiPeluru2.transform.position; //Mengatur inisial posisi peluru
+    }
+
+
+    void OnTriggerEnter2D (Collider2D col)
+    {
+        //deteksi collider pada player
+        if ((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag"))
+        {
+            PlayerExplosion();
+            Nyawa--; //nyawa berkurang
+            NyawaText.text = Nyawa.ToString(); //update nyawa UI
+
+            if (Nyawa == 0)
+            {
+                //ubah state game manager ke game over
+                gameManager.GetComponent<GameManager>().SetGameManagerState(GameManager.GameManagerState.GameOver);
+                
+                gameObject.SetActive(false);
+            }
+        }
+    }
+
+    //Fungsi untuk instantiate explosion
+    void PlayerExplosion()
+    {
+        GameObject explosion = (GameObject)Instantiate(Explosion);
+        audioSource.GetComponent<SoundManager>().Ledakan();
+        //set posisi explosion
+        explosion.transform.position = transform.position;
     }
 }

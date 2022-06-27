@@ -57,9 +57,10 @@ GameObject:
   - component: {fileID: 8894135215786237375}
   - component: {fileID: 8894135215786237374}
   - component: {fileID: 8894135215786237373}
+  - component: {fileID: 5006542283868751972}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: EnemyShipTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,8 +116,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2045993159
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -8868581108171312049, guid: 817cc61bba2cd5d40a261759fee462fc,
     type: 3}
@@ -161,3 +162,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901783dd741bf3f43882d98e40e9269e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explosion: {fileID: 3809716274451422084, guid: d4f7cfafc501dd44aa19eafa0c3f6768,
+    type: 3}
+--- !u!61 &5006542283868751972
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894135215786237345}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.72, y: 0.72}
+    newSize: {x: 0.72, y: 0.72}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.33, y: 0.39}
+  m_EdgeRadius: 0

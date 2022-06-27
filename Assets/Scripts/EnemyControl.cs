@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
+    GameObject scoreTextUI;
+    public GameObject Explosion;
 
     float speed; //speed untuk enemy
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 2f;        
+        speed = 2f;
+
+        //mendapatkan score text ui melalui tag
+        scoreTextUI = GameObject.FindGameObjectWithTag("ScoreTextTag");        
     }
 
     // Update is called once per frame
@@ -33,5 +38,27 @@ public class EnemyControl : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void OnTriggerEnter2D (Collider2D col)
+    {
+        //Deteksi collider pada musuh
+        if ((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag"))
+        {
+            PlayerExplosion();
+
+            //add 100 points
+            scoreTextUI.GetComponent<GameScore>().Score += 100;
+            Destroy (gameObject); //destroy pesawat musuh  
+        }
+    }
+
+    //Fungsi untuk instantiate explosion
+    void PlayerExplosion()
+    {
+        GameObject explosion = (GameObject)Instantiate(Explosion);
+       
+        //set posisi explosion
+        explosion.transform.position = transform.position;
     }
 }

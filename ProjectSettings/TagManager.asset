@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerShipTag
+  - EnemyShipTag
+  - PlayerBulletTag
+  - EnemyBulletTag
+  - ScoreTextTag
   layers:
   - Default
   - TransparentFX
@@ -40,4 +45,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3020899831
+    locked: 0
+  - name: Gameplay
+    uniqueID: 2248974137
+    locked: 0
+  - name: Effect
+    uniqueID: 944138607
     locked: 0
